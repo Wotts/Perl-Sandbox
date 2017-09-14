@@ -1,4 +1,4 @@
-package Random::Sorter;
+package Loop::Random::Sorter;
 
 use Moose;
 
@@ -11,4 +11,5 @@ sub sort_strings {
 
         return @sorted;
 }
+
 1;

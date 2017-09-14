@@ -1,6 +1,5 @@
-package Random::Randomizer;
+package Loop::Random::Randomizer;
 
-use Data::Dumper qw( Dumper );
 use Moose;
 
 sub randomize_string {
