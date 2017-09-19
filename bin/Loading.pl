@@ -3,10 +3,6 @@ use strict;
 use warnings;
 
 use lib 'lib';
-BEGIN{
-warn "$_\n" for @INC;
-die;
-}
 
 use Time::HiRes qw( sleep );
 use Term::ReadKey;
