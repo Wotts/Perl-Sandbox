@@ -6,6 +6,7 @@ use lib 'lib';
 
 use Time::HiRes qw( sleep );
 use Term::ReadKey;
+use Loop::DB::DBHandler qw( db_handle );
 use Loop::Looper;
 use Loop::Random::Sorter;
 
@@ -47,4 +48,19 @@ else {
     print "\nRandomized strings:\n".join ("\n", @randomized)."\n"
 }
 
-1;
+
+
+#Writing the strings plus date to the database
+
+my $dbh = db_handle('db/randomized_strings.db');
+my $now = time;
+
+my $sql_strings = <<'SQL';
+INSERT INTO strings (random_string, epoch_time)
+VALUES              ( ?, ?)
+SQL
+
+my $sth = $dbh->prepare($sql_strings);
+for (@sorted) {
+    $sth->execute($_, $now);
+}
