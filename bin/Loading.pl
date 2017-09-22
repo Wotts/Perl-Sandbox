@@ -56,9 +56,7 @@ else {
 my $schema = Loop::Schema->connect('dbi:SQLite:db/randomized_strings.db');
 my $now = time;
 
-for (@sorted) {
-    my $data = $schema->resultset('RandomString')->create({
-        string     => $_,
-        epoch_time => $now,
-    });
-}
+$schema->resultset('RandomString')->populate([
+    [ qw( string epoch_time ) ],
+    map { [ $_, $now ] } @sorted,
+]);
