@@ -6,9 +6,11 @@ use lib 'lib';
 
 use Time::HiRes qw( sleep );
 use Term::ReadKey;
+use DBIx::Class;
 use Loop::DB::DBHandler qw( db_handle );
 use Loop::Looper;
 use Loop::Random::Sorter;
+use Loop::Schema;
 
 my $looper = Loop::Looper->new;
 my $sorter = Loop::Random::Sorter->new;
@@ -51,16 +53,12 @@ else {
 
 
 #Writing the strings plus date to the database
-
-my $dbh = db_handle('db/randomized_strings.db');
+my $schema = Loop::Schema->connect('dbi:SQLite:db/randomized_strings.db');
 my $now = time;
 
-my $sql_strings = <<'SQL';
-INSERT INTO strings (random_string, epoch_time)
-VALUES              ( ?, ?)
-SQL
-
-my $sth = $dbh->prepare($sql_strings);
 for (@sorted) {
-    $sth->execute($_, $now);
+    my $data = $schema->resultset('RandomString')->create({
+        string     => $_,
+        epoch_time => $now,
+    });
 }

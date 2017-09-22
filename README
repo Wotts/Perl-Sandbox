@@ -1,1 +1,12 @@
 Experimenting with Perl
+
+Required CPAN Modules:
+Time::HiRes
+Term::ReadKey
+DBI
+DBIx::Class
+DBD::SQLite
+
+Recommended CPAN Modules:
+DBIx::Class::Schema::Loader
+dbicdump -o dump_directory=lib/ Loop::Schema dbi:SQLite:./db/databasename.db
