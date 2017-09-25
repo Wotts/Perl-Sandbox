@@ -40,14 +40,13 @@ $schema->resultset('RandomString')->populate([
     map { [ $_, $now ] } @sorted,
 ]);
 
-my $result = $schema->resultset('RandomString')->search(
-    {epoch_time => $now},
-    {rows => 10},
+my $result = $schema->resultset('RandomString')->find(
+    { string => $sorted[0] },
 );
+diag($result->string);
 
-while (my $r = $result->next) {
-    diag($r->string, ' ... ', $r->epoch_time)
-}
-ok($result, 'Resultset is defined');
+ok($result, 'Data is present');
+
+
 
 done_testing();
