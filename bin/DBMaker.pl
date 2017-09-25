@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS random_string (
     id              INTEGER         PRIMARY KEY,
     string          VARCHAR(255)    NOT NULL,
     epoch_time      VARCHAR(255)    NOT NULL,
+    lucky           VARCHAR(255),
     created_date    TIMESTAMP       DEFAULT CURRENT_TIMESTAMP
 );
 SQL

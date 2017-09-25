@@ -58,3 +58,13 @@ $schema->resultset('RandomString')->populate([
     [ qw( string epoch_time ) ],
     map { [ $_, $now ] } @sorted,
 ]);
+
+
+
+#Find a lucky string and mark it
+my $lucky_string = $schema->resultset('RandomString')->search(
+    { string => { -like => '%777%' } },
+);
+
+if ($lucky_string) {print "We've got " . $lucky_string . " lucky strings so far.\n"};
+$lucky_string->update_all({ lucky => 'slevin' });
