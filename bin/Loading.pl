@@ -7,13 +7,12 @@ use lib 'lib';
 use Time::HiRes qw( sleep );
 use Term::ReadKey;
 use DBIx::Class;
-use Loop::DB::DBHandler qw( db_handle );
 use Loop::Looper;
 use Loop::Random::Sorter;
 use Loop::Schema;
 
-my $looper = Loop::Looper->new;
-my $sorter = Loop::Random::Sorter->new;
+my $generator = Loop::Looper->new;
+my $sorter    = Loop::Random::Sorter->new;
 
 print "Enter desired number of randomized strings:\n";
 my $count_input = <STDIN>;
@@ -31,8 +30,7 @@ while ( ( scalar @randomized < $count_input ) && (!defined ($key = ReadKey(-1)))
     my $seconds = $i/10;
     printf "Loading... $load[$i % 4] for %.1f seconds... The current time is: %d\r", $seconds, time;
 
-    my $randomstring = $looper->randomlooper;
-    push @randomized, "$randomstring";
+    push @randomized, $generator->randomgenerator;
 
     sleep 0.1;
     $i++;

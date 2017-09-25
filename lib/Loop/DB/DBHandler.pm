@@ -7,6 +7,7 @@ use DBI;
 use Carp qw( croak );
 use Exporter::NoWork;
 
+#Define a template for a basic SQLite database
 sub db_handle {
     my $db_file = shift
         or croak "db_handle() requires a database name.";

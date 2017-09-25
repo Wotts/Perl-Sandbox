@@ -2,6 +2,8 @@ package Loop::Random::Sorter;
 
 use Moose;
 
+
+#Sort strings by numerics
 sub sort_strings {
     my $self = shift;
     my @sorted =

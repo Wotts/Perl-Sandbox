@@ -6,6 +6,7 @@ Term::ReadKey
 DBI
 DBIx::Class
 DBD::SQLite
+SQL::Translator
 
 Recommended CPAN Modules:
 DBIx::Class::Schema::Loader
